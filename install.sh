@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 DOT_FILES_PATH=$HOME/dotfiles
 
@@ -7,12 +7,14 @@ setup_channel() {
     added=0
 
     # チャネルが追加されていなければ追加する
-    if [ -z (nix-channel --list | grep "^nixpkgs https://nixos.org/channels/nixpkgs-unstable$") ]; then
+    nix-channel --list | grep -e '^nixpkgs https://nixos.org/channels/nixpkgs-unstable$' > /dev/null
+    if [ $? ]; then
         nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
         added=1
     fi
 
-    if [ -z (nix-channel --list | grep "^home-manager https://github.com/nix-community/home-manager/archive/master.tar.gz$") ]; then
+    nix-channel --list | grep "^home-manager https://github.com/nix-community/home-manager/archive/master.tar.gz$" > /dev/null
+    if [ $? ]; then
         nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
         added=1
     fi
@@ -58,12 +60,19 @@ setup() {
     fi
 
     # セットアップを実行
-    home_manager switch
+    home-manager switch
 
     # シェルがzshではない場合、変更する
     #   正規表現のマッチ: https://qiita.com/Linda_pp/items/31fa611766598715a172
     if ! expr ${SHELL} : "zsh$" > /dev/null; then
-        chsh -s $HOME/.nix-profile/bin/zsh
+        # ログインシェルに追加する
+        #   https://unix.stackexchange.com/questions/111365/how-to-change-default-shell-to-zsh-chsh-says-invalid-shell
+        zshpath=$HOME/.nix-profile/bin/zsh
+        sudo cat /etc/shells | grep ${zshpath} > /dev/null
+        if [ $? ]; then
+            echo ${zshpath} | sudo tee -a /etc/shells
+        fi
+        chsh -s ${zshpath}
     fi
 }
 
