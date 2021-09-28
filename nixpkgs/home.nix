@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+    zshsettings = import ./zsh.nix;
+in
+
 {
 
   home.username = "tamago324";
@@ -7,6 +11,9 @@
 
   # home-manager のバージョンを固定する
   home.stateVersion = "21.11";
+
+  # zsh の設定を読み込む
+  programs.zsh = zshsettings pkgs;
 
   home.packages = with pkgs; [
     zsh
