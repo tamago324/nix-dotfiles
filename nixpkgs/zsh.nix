@@ -240,7 +240,7 @@
     completionInit = "autoload -Uz compinit && compinit";
 
     history = {
-      path = '$HOME/.zsh_history';
+      path = "$HOME/.zsh_history";
       save = 10000;
       size = 10000;
     };
