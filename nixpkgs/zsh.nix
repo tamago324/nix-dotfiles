@@ -240,7 +240,7 @@ pkgs:
         # setopt PROMPT_SUBST
     '';
 
-    shellAliases = ''
+    shellAliases = {
         v = 'nvim';
-    '';
+    };
 }
