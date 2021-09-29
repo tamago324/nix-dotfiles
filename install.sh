@@ -34,7 +34,7 @@ fetch_dotfiles() {
     git clone https://github.com/tamago324/nix-dotfiles ${DOT_FILES_PATH}
     cd ${DOT_FILES_PATH}/nixpkgs
     mkdir -p ~/.config
-    ln -s $(pwd)/nixpkgs $HOME/.config/nixpkgs
+    ln -s $(pwd) $HOME/.config/nixpkgs
 }
 
 setup() {
