@@ -48,7 +48,7 @@ pkgs:
         # completion  リテラル文字列
         # function
         # TODO: 理解する
-        zstyle ':completion:*' group-name ''
+        zstyle ':completion:*' group-name ""
         zstyle ':completion:*:messages' format '%d'
         zstyle ':completion:*:descriptions' format '%d'
         zstyle ':completion:*:options' verbose yes
@@ -60,7 +60,7 @@ pkgs:
         zstyle ':completion:*' use-cache true
         zstyle ':completion:*:default' menu select=1
         zstyle ':completion:*' matcher-list \
-            '' \
+            "" \
             'm:{a-z}={A-Z}' \
             'l:|=* r:|[.,_-]=* r:|=* m:{a-z}={A-Z}'
         # sudo completions
