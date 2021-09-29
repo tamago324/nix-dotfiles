@@ -46,6 +46,16 @@ setup_vimfiles() {
     ln -s ${VIMFILES_PATH} $HOME/.config/nvim
 }
 
+# neovim でクリップボードを使えるようにする
+# https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
+setup_win32yank() {
+    curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+    unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+    chmod +x /tmp/win32yank.exe
+    mkdir -p $HOME/.local/bin
+    mv /tmp/win32yank.exe ~/.local/bin
+}
+
 setup() {
     if [ -z $(which nix) ]; then
         echo 'Not installed `nix` command.'
@@ -70,6 +80,13 @@ setup() {
 
     if [ ! -d ${VIMFILES_PATH} ]; then
         setup_vimfiles
+    fi
+
+    # WSLなら、win32yank.exeをダウンロードする
+    if [ -d /run/WSL ]; then
+      if [ -e $HOME/.local/bin/win32yank.exe ]; then
+          setup_win32yank
+      fi
     fi
 
     # セットアップを実行

@@ -39,6 +39,9 @@ in
     exa
     python3
     neovim-remote
+
+    # tree-sitter のため
+    gcc
   ];
 
   home.file = {
