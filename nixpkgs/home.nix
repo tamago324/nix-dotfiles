@@ -14,8 +14,8 @@ in
 
   programs = {
     home-manager.enable = true;
-    zsh = (zshsettings pkgs);
   };
+  programs.zsh = (zshsettings pkgs);
 
   home.packages = with pkgs; [
     zsh
