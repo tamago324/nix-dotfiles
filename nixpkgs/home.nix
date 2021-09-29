@@ -12,8 +12,10 @@ in
   # home-manager のバージョンを固定する
   home.stateVersion = "21.11";
 
-  # zsh の設定を読み込む
-  programs.zsh = zshsettings pkgs;
+  programs = {
+    home-manager.enable = true;
+    zsh = zshsettings pkgs;
+  };
 
   home.packages = with pkgs; [
     zsh
@@ -38,10 +40,6 @@ in
     python3
     neovim-remote
   ];
-
-  programs = {
-    home-manager.enable = true;
-  };
 
   home.file = {
   #   ".gitconfig".source = ./.gitconfig;

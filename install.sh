@@ -34,7 +34,7 @@ fetch_dotfiles() {
     git clone https://github.com/tamago324/nix-dotfiles ${DOT_FILES_PATH}
     cd ${DOT_FILES_PATH}/nixpkgs
     mkdir -p ~/.config
-    ln -s $(pwd) ~/.config/nixpkgs
+    ln -s $(pwd) $HOME/.config/nixpkgs
 }
 
 setup() {
@@ -62,18 +62,19 @@ setup() {
     # セットアップを実行
     home-manager switch
 
-    # シェルがzshではない場合、変更する
-    #   正規表現のマッチ: https://qiita.com/Linda_pp/items/31fa611766598715a172
-    if ! expr ${SHELL} : "zsh$" > /dev/null; then
-        # ログインシェルに追加する
-        #   https://unix.stackexchange.com/questions/111365/how-to-change-default-shell-to-zsh-chsh-says-invalid-shell
-        zshpath=$HOME/.nix-profile/bin/zsh
-        sudo cat /etc/shells | grep ${zshpath} > /dev/null
-        if [ $? ]; then
-            echo ${zshpath} | sudo tee -a /etc/shells
-        fi
-        chsh -s ${zshpath}
-    fi
+    # シェルの設定も合わせて home-manager で行うため、ここでは何もしない
+    ## シェルがzshではない場合、変更する
+    ##   正規表現のマッチ: https://qiita.com/Linda_pp/items/31fa611766598715a172
+    #if ! expr ${SHELL} : "zsh$" > /dev/null; then
+    #    # ログインシェルに追加する
+    #    #   https://unix.stackexchange.com/questions/111365/how-to-change-default-shell-to-zsh-chsh-says-invalid-shell
+    #    zshpath=$HOME/.nix-profile/bin/zsh
+    #    sudo cat /etc/shells | grep ${zshpath} > /dev/null
+    #    if [ $? ]; then
+    #        echo ${zshpath} | sudo tee -a /etc/shells
+    #    fi
+    #    chsh -s ${zshpath}
+    #fi
 }
 
 setup
