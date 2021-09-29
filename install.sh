@@ -35,7 +35,8 @@ fetch_dotfiles() {
     cd ${DOT_FILES_PATH}/nixpkgs
     mkdir -p ~/.config
     # 強制的に作成する (home-manager をインストールすると、~/.config/nixpkgs が作成されてしまうため)
-    ln -sf $(pwd) $HOME/.config/nixpkgs
+    rm -rf $HOME/.config/nixpkgs
+    ln -s $(pwd) $HOME/.config/nixpkgs
 }
 
 setup() {
