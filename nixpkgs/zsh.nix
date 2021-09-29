@@ -238,9 +238,11 @@ pkgs:
         # # TODO: 理解する
         # # プロンプトで置換する？
         # setopt PROMPT_SUBST
+        if [ -e /home/tamago324/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tamago324/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
     '';
 
     shellAliases = {
         v = "nvim";
+	gs = "git status";
     };
 }
