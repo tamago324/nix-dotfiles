@@ -241,6 +241,6 @@ pkgs:
     '';
 
     shellAliases = {
-        v = 'nvim';
+        v = "nvim";
     };
 }
