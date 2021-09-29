@@ -34,7 +34,8 @@ fetch_dotfiles() {
     git clone https://github.com/tamago324/nix-dotfiles ${DOT_FILES_PATH}
     cd ${DOT_FILES_PATH}/nixpkgs
     mkdir -p ~/.config
-    ln -s $(pwd) $HOME/.config/nixpkgs
+    # 強制的に作成する (home-manager をインストールすると、~/.config/nixpkgs が作成されてしまうため)
+    ln -sf $(pwd) $HOME/.config/nixpkgs
 }
 
 setup() {
