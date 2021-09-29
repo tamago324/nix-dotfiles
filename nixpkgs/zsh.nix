@@ -6,6 +6,6 @@ pkgs:
     
     enableAutosuggestions = true;
     enableCompletion = true;
-    enableSyntraxHighlighting = true;
+    enableSyntaxHighlighting = true;
 
 }
