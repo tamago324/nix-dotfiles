@@ -243,6 +243,6 @@ pkgs:
 
     shellAliases = {
         v = "nvim";
-	gs = "git status";
+        gs = "git status";
     };
 }

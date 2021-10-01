@@ -6,11 +6,12 @@
 	autocrlf = input
 	excludesfile = ~/git/ignore
 
-[credential]
-	helper = wincred
+# [credential]
+# 	helper = wincred
 
 [url "git@github.com:"]
     pushInsteadOf = https://github.com/
+
 [rebase]
 	autostash = true
 	# https://motemen.hatenablog.com/entry/2015/10/git-commit-fixup

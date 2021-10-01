@@ -24,12 +24,8 @@ in
     ghq
     fd
     ripgrep
-    tealdeer
     universal-ctags
-    curl
-    wget
     git
-    tree
     nodejs-16_x
     yarn
     deno
@@ -38,10 +34,26 @@ in
     bat
     exa
     python3
+    python39Packages.pip    # こうしないと pip が入らない
     neovim-remote
 
     # tree-sitter のため
     gcc
+
+    curl
+    wget
+    tree
+    unzip
+
+    ffmpeg
+    tealdeer
+
+    # libffi
+    # zlib
+
+    docker
+    docker-compose
+    jdk8
   ];
 
   home.file = {
