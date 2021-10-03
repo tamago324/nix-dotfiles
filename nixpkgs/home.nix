@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
 let
-    zshsettings = import ./zsh.nix;
+  zshsettings = import ./zsh.nix;
 
-    wsl_pkgs = with pkgs; [
-        wslu
-    ];
+  wsl_pkgs = with pkgs; [
+    wslu
+  ];
 in
 
 {
@@ -24,7 +24,7 @@ in
   home.packages = with pkgs; [
     zsh
     neovim
-    gh 
+    gh
     ghq
     fd
     ripgrep
@@ -39,7 +39,7 @@ in
     bat
     exa
     python3
-    python39Packages.pip    # こうしないと pip が入らない
+    python39Packages.pip # こうしないと pip が入らない
     neovim-remote
 
     nixpkgs-fmt
@@ -66,9 +66,9 @@ in
   ] ++ wsl_pkgs;
 
   home.file = {
-  #   ".gitconfig".source = ./.gitconfig;
-  #   ".config/nvim".source = ./.config/nvim;
-  #   ".config/alacritty.yml".source = ./.config/alacritty.yml;
+    #   ".gitconfig".source = ./.gitconfig;
+    #   ".config/nvim".source = ./.config/nvim;
+    #   ".config/alacritty.yml".source = ./.config/alacritty.yml;
     ".vim".source = ./../.vim;
     ".gitconfig".source = ./../.gitconfig;
   };
