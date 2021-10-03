@@ -3,6 +3,7 @@
 GHQ_ROOT=$HOME/ghq
 VIMFILES_PATH=${GHQ_ROOT}/github.com/tamago324/vimfiles
 DOT_FILES_PATH=$HOME/dotfiles
+ZSH_COMPLETION_DIR=${HOME}/.config/zsh/comp
 
 # nix をセットアップ
 setup_channel() {
@@ -56,6 +57,31 @@ setup_win32yank() {
     mv /tmp/win32yank.exe ~/.local/bin
 }
 
+setup_completion() {
+  echo '補完スクリプトを生成'
+  mkdir -p ${ZSH_COMPLETION_DIR}
+
+  # 連想配列
+  # キーがコマンドのチェックで、値がスクリプトを生成するためのコマンド
+  # なんかうまくできなかった
+  declare -A commands=(
+    [pip]='pip completion --zsh > ${ZSH_COMPLETION_DIR}/_pip'
+  )
+
+  # キーでループする
+  for cmd in ${!commands[@]}
+  do
+    # 実行できるなら、生成する
+    if [[ -n `which ${cmd}` ]]; then
+      echo "${cmd} : ${commands[${cmd}]}"
+      # eval を使うと、文字列のコマンドを実行できる
+      eval ${commands[${cmd}]}
+    else
+      echo "Not found ${cmd}"
+    fi
+  done
+}
+
 setup() {
     if [ -z $(which nix) ]; then
         echo 'Not installed `nix` command.'
@@ -91,6 +117,8 @@ setup() {
 
     # セットアップを実行
     home-manager switch
+
+    setup_completion
 
     # シェルがzshではない場合、変更する
     #   正規表現のマッチ: https://qiita.com/Linda_pp/items/31fa611766598715a172
