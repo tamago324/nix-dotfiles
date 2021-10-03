@@ -2,7 +2,7 @@ pkgs:
 
 {
     enable = true;
-    # dotDir = ".config/zsh";
+    dotDir = ".config/zsh";
     
     enableAutosuggestions = true;
     enableCompletion = true;
@@ -10,9 +10,9 @@ pkgs:
 
     envExtra = ''
         # completions
-        if [ -d $HOME/.zsh/comp ]; then
-            export FPATH="$HOME/.zsh/comp:$FPATH"
-        fi
+        # if [ -d $HOME/.zsh/comp ]; then
+        #     export FPATH="$HOME/.zsh/comp:$FPATH"
+        # fi
 
         # go get で入れたものを使えるようにする
         export PATH="$PATH:$HOME/go/bin"
@@ -38,6 +38,14 @@ pkgs:
 
         export DENO_INSTALL="$HOME/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
+
+        # これ、めんどくさいのどうにかならないのかな...
+        # ここに追加してあげないと、 zpty で読み込めなかった...
+        export FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
+        export FPATH="$HOME/.nix-profile/share/zsh/5.8:$FPATH"
+        export FPATH="$HOME/.config/zsh/plugins/zsh-completions/src:$FPATH"
+        export FPATH="$HOME/.config/zsh/plugins/zsh-completions:$FPATH"
+        export FPATH="$HOME/.config/zsh/comp:$FPATH"
     '';
 
     # compinit の前に書き出す
@@ -244,5 +252,23 @@ pkgs:
     shellAliases = {
         v = "nvim";
         gs = "git status";
+        cat = "bat";
+        ll = "exa";
+        la = "exa -al";
     };
+
+    # 以下のように実行した結果をそのまま使える
+    # $ nix-shell -p nix-prefetch-github
+    # $ nix-prefetch-github zsh-users zsh-completions --nix
+    plugins = [
+        {
+            name = "zsh-completions";
+            src = pkgs.fetchFromGitHub {
+                owner = "zsh-users";
+                repo = "zsh-completions";
+                rev = "bebaa6126ede6bda698a6788c6cf3fa02ff1679c";
+                sha256 = "154cs5rhz75b3f5xsi2blzgbrip3j9s3v8qnbrdaz1yd2m4la0lm";
+            };
+        }
+    ];
 }

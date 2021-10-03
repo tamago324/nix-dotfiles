@@ -2,6 +2,10 @@
 
 let
     zshsettings = import ./zsh.nix;
+
+    wsl_pkgs = with pkgs; [
+        wslu
+    ];
 in
 
 {
@@ -27,6 +31,7 @@ in
     universal-ctags
     git
     nodejs-16_x
+    nodePackages.prettier
     yarn
     deno
     fzf
@@ -36,6 +41,9 @@ in
     python3
     python39Packages.pip    # こうしないと pip が入らない
     neovim-remote
+
+    nixpkgs-fmt
+    rnix-lsp
 
     # tree-sitter のため
     gcc
@@ -51,10 +59,11 @@ in
     # libffi
     # zlib
 
-    docker
-    docker-compose
+    # WSLの場合、うまく行かなかったため、apt でインストールすることにした
+    # docker
+    # docker-compose
     jdk8
-  ];
+  ] ++ wsl_pkgs;
 
   home.file = {
   #   ".gitconfig".source = ./.gitconfig;
