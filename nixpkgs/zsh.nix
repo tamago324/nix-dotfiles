@@ -247,6 +247,14 @@ pkgs:
     # # プロンプトで置換する？
     # setopt PROMPT_SUBST
     if [ -e /home/tamago324/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tamago324/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+    # WSL のときのみ、docker を起動する
+    if [ -d /run/WSL ]; then
+        service docker status > /dev/null 2>&1
+        if [ $? = 1 ]; then
+            sudo service docker start
+        fi
+    fi
   '';
 
   shellAliases = {
@@ -272,4 +280,5 @@ pkgs:
     }
   ];
 }
-# vim: set ft=nix
+
+# vim: set ft=nix:

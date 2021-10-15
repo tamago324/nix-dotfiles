@@ -9,7 +9,6 @@ let
 in
 
 {
-
   home.username = "tamago324";
   home.homeDirectory = "/home/tamago324";
 
@@ -23,24 +22,28 @@ in
 
   home.packages = with pkgs; [
     zsh
-    neovim
     gh
     ghq
-    fd
-    ripgrep
     universal-ctags
     git
     nodejs-16_x
     nodePackages.prettier
+    nodePackages.typescript
+    # nodePackages.typescript-language-server
     yarn
     deno
     fzf
-    jq
-    bat
     exa
     python3
     python39Packages.pip # こうしないと pip が入らない
     neovim-remote
+
+    neovim
+    stylua
+    fd
+    ripgrep
+    bat
+    jq
 
     nixpkgs-fmt
     rnix-lsp
