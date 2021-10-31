@@ -17,6 +17,9 @@ pkgs:
     # go get で入れたものを使えるようにする
     export PATH="$PATH:$HOME/go/bin"
 
+    # bin を入れる
+    export PATH="$PATH:$HOME/.local/bin"
+
     # ghq の設定
     export GHQ_ROOT="$HOME/ghq"
 
@@ -251,8 +254,8 @@ pkgs:
     # WSL のときのみ、docker を起動する
     if [ -d /run/WSL ]; then
         service docker status > /dev/null 2>&1
-        if [ $? = 1 ]; then
-            sudo service docker start
+        if [ $? != 1 ]; then
+            sudo service docker start > /dev/null 2>&1
         fi
     fi
   '';

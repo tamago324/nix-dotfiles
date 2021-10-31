@@ -29,6 +29,8 @@ in
     nodejs-16_x
     nodePackages.prettier
     nodePackages.typescript
+    # SQL フォーマットツール (nvim の formatter.nvim で使う)
+    nodePackages.sql-formatter
     # nodePackages.typescript-language-server
     yarn
     deno
@@ -38,6 +40,9 @@ in
     python39Packages.pip # こうしないと pip が入らない
     neovim-remote
 
+    lua53Packages.luacheck
+
+    # nightly をダウンロードするため、ここではインストールしない
     neovim
     stylua
     fd
@@ -66,6 +71,8 @@ in
     # docker
     # docker-compose
     jdk8
+
+    mysql80
   ] ++ wsl_pkgs;
 
   home.file = {
