@@ -6,6 +6,13 @@ let
   wsl_pkgs = with pkgs; [
     wslu
   ];
+
+  # # TODO: jidoude hanndannsuru
+  # laptop_pkgs = with pkgs; [
+  #   #intel-graphics-compiler # for alacritty
+  #   alacritty
+  #   google-chrome
+  # ];
 in
 
 {
@@ -36,11 +43,14 @@ in
     deno
     fzf
     exa
+    neofetch
+
     python3
     python39Packages.pip # こうしないと pip が入らない
     neovim-remote
 
     lua53Packages.luacheck
+    lua53Packages.luarocks
 
     # nightly をダウンロードするため、ここではインストールしない
     neovim
@@ -73,13 +83,21 @@ in
     jdk8
 
     mysql80
-  ] ++ wsl_pkgs;
+
+  ];
+  # ] ++ laptop_pkgs;
 
   home.file = {
     #   ".gitconfig".source = ./.gitconfig;
     #   ".config/nvim".source = ./.config/nvim;
-    #   ".config/alacritty.yml".source = ./.config/alacritty.yml;
+    ".config/alacritty.yml".source = ../.config/alacritty.yml;
     ".vim".source = ./../.vim;
     ".gitconfig".source = ./../.gitconfig;
+    ".local/bin".source = ../bin;
+
+    # fcitx5 用の設定ファイル
+    ".pam_environment".source = ./../.pam_environment;
+    ".local/share/fcitx5/addon/hotkey-extension.conf".source = ./../fcitx5/addon/hotkey-extension.conf;
+    ".local/share/fcitx5/lua/hotkey-extension/main.lua".source = ./../fcitx5/lua/hotkey-extension/main.lua;
   };
 }
