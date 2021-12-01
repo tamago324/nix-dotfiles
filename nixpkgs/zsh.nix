@@ -23,6 +23,16 @@ pkgs:
     # ghq の設定
     export GHQ_ROOT="$HOME/ghq"
 
+    # compopser
+    if [ -d "$HOME/.config/composer/vendor" ]; then
+        export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+    fi
+
+    # yarn
+    if [ -d "$HOME/.yarn/bin" ]; then
+        export PATH="$PATH:$HOME/.yarn/bin"
+    fi
+
     # 文字コード
     export LANG=ja_JP.UTF-8
 
@@ -42,13 +52,13 @@ pkgs:
     export DENO_INSTALL="$HOME/.deno"
     export PATH="$DENO_INSTALL/bin:$PATH"
 
-    # これ、めんどくさいのどうにかならないのかな...
-    # ここに追加してあげないと、 zpty で読み込めなかった...
-    export FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
-    export FPATH="$HOME/.nix-profile/share/zsh/5.8:$FPATH"
-    export FPATH="$HOME/.config/zsh/plugins/zsh-completions/src:$FPATH"
-    export FPATH="$HOME/.config/zsh/plugins/zsh-completions:$FPATH"
-    export FPATH="$HOME/.config/zsh/comp:$FPATH"
+    # # これ、めんどくさいのどうにかならないのかな...
+    # # ここに追加してあげないと、 zpty で読み込めなかった...
+    # export FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
+    # export FPATH="$HOME/.nix-profile/share/zsh/5.8:$FPATH"
+    # export FPATH="$HOME/.config/zsh/plugins/zsh-completions/src:$FPATH"
+    # export FPATH="$HOME/.config/zsh/plugins/zsh-completions:$FPATH"
+    # export FPATH="$HOME/.config/zsh/comp:$FPATH"
   '';
 
   # compinit の前に書き出す
@@ -266,6 +276,7 @@ pkgs:
     cat = "bat";
     ll = "exa";
     la = "exa -al";
+    sail = "vendor/bin/sail";
   };
 
   # 以下のように実行した結果をそのまま使える
@@ -280,6 +291,18 @@ pkgs:
         rev = "bebaa6126ede6bda698a6788c6cf3fa02ff1679c";
         sha256 = "154cs5rhz75b3f5xsi2blzgbrip3j9s3v8qnbrdaz1yd2m4la0lm";
       };
+    }
+    {
+      # これ、毎週変わるかも？時々、最新かどうかをチェックしたほうがいいかも？
+      name = "docker-zsh-completion";
+      src = pkgs.fetchFromGitHub
+        {
+          owner = "greymd";
+          repo = "docker-zsh-completion";
+          rev = "7dd1e1d4864297c72267466bc404895aa6b4cc24";
+          sha256 = "0ll3v3w03kwyi30x8fqbhy55i33b6k2v92ks53wb6wp967v79nbs";
+          fetchSubmodules = true;
+        };
     }
   ];
 }

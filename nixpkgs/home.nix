@@ -7,12 +7,14 @@ let
     wslu
   ];
 
-  # # TODO: jidoude hanndannsuru
-  # laptop_pkgs = with pkgs; [
-  #   #intel-graphics-compiler # for alacritty
-  #   alacritty
-  #   google-chrome
-  # ];
+  # TODO: jidoude hanndannsuru
+  laptop_pkgs = with pkgs; [
+    #intel-graphics-compiler # for alacritty
+    # alacritty
+    # google-chrome
+    alttab
+    peek
+  ];
 in
 
 {
@@ -26,6 +28,12 @@ in
     home-manager.enable = true;
   };
   programs.zsh = zshsettings pkgs;
+
+  /* # https://nixos.wiki/wiki/Visual_Studio_Code */
+  /* programs.vscode = {                          */
+  /*   enable = true;                             */
+  /*   package = pkgs.vscodium;                   */
+  /* };                                           */
 
   home.packages = with pkgs; [
     zsh
@@ -82,10 +90,14 @@ in
     # docker-compose
     jdk8
 
+    php
+    php80Packages.composer
+    php80Packages.php-cs-fixer
+
     mysql80
 
-  ];
-  # ] ++ laptop_pkgs;
+    # ];
+  ] ++ laptop_pkgs;
 
   home.file = {
     #   ".gitconfig".source = ./.gitconfig;
@@ -99,5 +111,9 @@ in
     ".pam_environment".source = ./../.pam_environment;
     ".local/share/fcitx5/addon/hotkey-extension.conf".source = ./../fcitx5/addon/hotkey-extension.conf;
     ".local/share/fcitx5/lua/hotkey-extension/main.lua".source = ./../fcitx5/lua/hotkey-extension/main.lua;
+
+    # xfce 用
+    ".xinitrc".source = ./../.xinitrc;
+    ".xprofile".source = ./../.xprofile;
   };
 }
