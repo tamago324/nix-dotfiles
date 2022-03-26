@@ -2,17 +2,6 @@ Linux 用のセットアップ
 
 dotfiles と vimfiles をダウンロード
 ```
-$ sh <(curl -Ls https://raw.githubusercontent.com/tamago324/nix-dotfiles/main/install.sh)
+$ sh <(curl -Ls https://raw.githubusercontent.com/tamago324/dotfiles/use-yay/install.sh)
 ```
 
-リンク
-
-```
-$ make link
-```
-
-ツールのインストール
-
-```
-$ make install
-```
