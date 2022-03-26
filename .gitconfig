@@ -7,7 +7,8 @@
 	excludesfile = ~/git/ignore
 
 # [credential]
-# 	helper = wincred
+# 	# 資格情報を保存する
+# 	helper = store
 
 # [url "git@github.com:"]
 #     pushInsteadOf = https://github.com/

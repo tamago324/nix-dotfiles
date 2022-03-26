@@ -5,33 +5,6 @@ VIMFILES_PATH=${GHQ_ROOT}/github.com/tamago324/vimfiles
 DOT_FILES_PATH=$HOME/dotfiles
 ZSH_COMPLETION_DIR=${HOME}/.config/zsh/comp
 
-# nix をセットアップ
-setup_channel() {
-    added=0
-
-    # チャネルが追加されていなければ追加する
-    nix-channel --list | grep -e '^nixpkgs https://nixos.org/channels/nixpkgs-unstable$' > /dev/null
-    if [ $? ]; then
-        nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-        added=1
-    fi
-
-    nix-channel --list | grep "^home-manager https://github.com/nix-community/home-manager/archive/master.tar.gz$" > /dev/null
-    if [ $? ]; then
-        nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-        added=1
-    fi
-
-    if [ ${added} -eq 1 ]; then
-        nix-channel --update
-    fi
-}
-
-# home-manager をインストール
-install_home_manager() {
-    nix-shell '<home-manager>' -A install
-}
-
 # nix-dotfiles をダウンロードして、nixpkgs を配置する
 fetch_dotfiles() {
     git clone https://github.com/tamago324/nix-dotfiles ${DOT_FILES_PATH}
@@ -93,12 +66,6 @@ setup() {
         echo
         exit 1
     fi
-    
-    setup_channel
-
-    if [ -z $(which home-manager) ]; then
-        install_home_manager
-    fi
 
     # dotfiles がなければダウンロードする
     if [ ! -d ${DOT_FILES_PATH} ]; then
@@ -115,9 +82,6 @@ setup() {
           setup_win32yank
       fi
     fi
-
-    # セットアップを実行
-    home-manager switch
 
     # setup_completion
 

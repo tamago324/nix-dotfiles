@@ -10,9 +10,9 @@ pkgs:
 
   envExtra = ''
     # completions
-    # if [ -d $HOME/.zsh/comp ]; then
-    #     export FPATH="$HOME/.zsh/comp:$FPATH"
-    # fi
+    if [ -d $HOME/.config/zsh/comp ]; then
+        export FPATH="$HOME/.config/zsh/comp:$FPATH"
+    fi
 
     # go get で入れたものを使えるようにする
     export PATH="$PATH:$HOME/go/bin"
@@ -26,6 +26,10 @@ pkgs:
     # compopser
     if [ -d "$HOME/.config/composer/vendor" ]; then
         export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+    fi
+
+    if [ -d "$HOME/.luarocks/bin" ]; then
+        export PATH="$PATH:$HOME/.luarocks/bin"
     fi
 
     # yarn
@@ -59,6 +63,8 @@ pkgs:
     # export FPATH="$HOME/.config/zsh/plugins/zsh-completions/src:$FPATH"
     # export FPATH="$HOME/.config/zsh/plugins/zsh-completions:$FPATH"
     # export FPATH="$HOME/.config/zsh/comp:$FPATH"
+
+    # export ZSH_COMPLETION_DIR=
   '';
 
   # compinit の前に書き出す
@@ -268,6 +274,15 @@ pkgs:
             sudo service docker start > /dev/null 2>&1
         fi
     fi
+
+    # pure を実行
+    autoload -U promptinit; promptinit
+    prompt pure
+
+    # anyenv
+    if [[ -n `which anyenv` ]]; then
+        eval "$(anyenv init -)"
+    fi
   '';
 
   shellAliases = {
@@ -277,6 +292,7 @@ pkgs:
     ll = "exa";
     la = "exa -al";
     sail = "vendor/bin/sail";
+    dc = "docker-compose";
   };
 
   # 以下のように実行した結果をそのまま使える
@@ -304,7 +320,16 @@ pkgs:
           fetchSubmodules = true;
         };
     }
+    {
+      name = "z";
+      file = "zsh-z.plugin.zsh";
+      src = pkgs.fetchFromGitHub {
+        owner = "agkozak";
+        repo = "zsh-z";
+        rev = "41439755cf06f35e8bee8dffe04f728384905077";
+        sha256 = "1dzxbcif9q5m5zx3gvrhrfmkxspzf7b81k837gdb93c4aasgh6x6";
+      };
+    }
   ];
 }
-
 # vim: set ft=nix:

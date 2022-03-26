@@ -41,6 +41,8 @@ window:
    columns: 180
    lines: 82
 
+  opacity: 0.7
+
   # Window position (changes require restart)
   #
   # Specified in number of pixels.
@@ -378,7 +380,7 @@ bell:
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 #background_opacity: 1.0
-background_opacity: 0.7
+# background_opacity: 0.7
 
 #selection:
 selection:
@@ -433,7 +435,7 @@ cursor:
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
   #thickness: 0.15
-  thickness: 0.15
+  thickness: 0.20
 
 # Live config reload (changes require restart)
 #live_config_reload: true
@@ -733,7 +735,7 @@ mouse:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
   #- { key: L,         mods: Control,             action: ClearLogNotice }
@@ -793,7 +795,7 @@ mouse:
   #- { key: N,      mods: Shift,         mode: Vi, action: SearchPrevious          }
 
   # (Windows, Linux, and BSD only)
-  #- { key: V,              mods: Control|Shift,           action: Paste            }
+  - { key: V,              mods: Control|Shift,           action: Paste            }
   #- { key: C,              mods: Control|Shift,           action: Copy             }
   #- { key: F,              mods: Control|Shift,           action: SearchForward    }
   #- { key: B,              mods: Control|Shift,           action: SearchBackward   }
