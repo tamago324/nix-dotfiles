@@ -38,8 +38,8 @@ in
   /* };                                           */
 
   home.packages = with pkgs; [
-    zsh
-    zsh-z
+    /* zsh */
+    /* zsh-z */
 
     git
 
@@ -143,7 +143,6 @@ in
     #   ".gitconfig".source = ./.gitconfig;
     #   ".config/nvim".source = ./.config/nvim;
     ".config/alacritty/alacritty.yml".source = ../.config/alacritty.yml;
-    ".config/wezterm/wezterm.lua".source = ../.config/wezterm.lua;
     ".vim".source = ./../.vim;
     ".gitconfig".source = ./../.gitconfig;
     ".local/bin".source = ../bin;
