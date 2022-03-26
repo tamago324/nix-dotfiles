@@ -14,6 +14,7 @@ let
     # google-chrome
     alttab
     peek
+    vokoscreen-ng
   ];
 in
 
@@ -22,7 +23,8 @@ in
   home.homeDirectory = "/home/tamago324";
 
   # home-manager のバージョンを固定する
-  home.stateVersion = "21.11";
+  /* home.stateVersion = "21.11"; */
+  home.stateVersion = "22.05";
 
   programs = {
     home-manager.enable = true;
@@ -36,11 +38,14 @@ in
   /* };                                           */
 
   home.packages = with pkgs; [
-    zsh
+    /* zsh */
+    /* zsh-z */
+
+    git
+
     gh
     ghq
     universal-ctags
-    git
     nodejs-16_x
     nodePackages.prettier
     nodePackages.typescript
@@ -53,15 +58,25 @@ in
     exa
     neofetch
 
+    heroku
+    postgresql
+
     python3
     python39Packages.pip # こうしないと pip が入らない
+    # solaar に必要
+    python39Packages.pyudev
+    python39Packages.psutil
+    python39Packages.xlib
+    python39Packages.pyaml
+
     neovim-remote
 
-    lua53Packages.luacheck
-    lua53Packages.luarocks
+    lua51Packages.luacheck
+    lua51Packages.luarocks
+    /* lua51Packages.luafilesystem */
 
     # nightly をダウンロードするため、ここではインストールしない
-    neovim
+    /* neovim */
     stylua
     fd
     ripgrep
@@ -95,6 +110,31 @@ in
     php80Packages.php-cs-fixer
 
     mysql80
+    # クライアント
+    mycli
+
+    # # Logicool トラックボールの設定アプリ
+    solaar
+
+    # cheat.sh
+    cht-sh
+    pure-prompt
+
+    exercism
+    cargo
+
+    virtualbox
+    vagrant
+
+    # うまく使えなかったから、yay でいれる
+    # plantuml
+
+    # nyancat
+    # w3m
+
+    vim
+
+    epson-escpr
 
     # ];
   ] ++ laptop_pkgs;
@@ -102,7 +142,7 @@ in
   home.file = {
     #   ".gitconfig".source = ./.gitconfig;
     #   ".config/nvim".source = ./.config/nvim;
-    ".config/alacritty.yml".source = ../.config/alacritty.yml;
+    ".config/alacritty/alacritty.yml".source = ../.config/alacritty.yml;
     ".vim".source = ./../.vim;
     ".gitconfig".source = ./../.gitconfig;
     ".local/bin".source = ../bin;
